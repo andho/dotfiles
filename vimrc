@@ -20,6 +20,7 @@ Plug 'nvie/vim-flake8'
 Plug 'elmcast/elm-vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'vim-vdebug/vdebug'
+Plug 'Rykka/InstantRst'
 
 call plug#end()
 
