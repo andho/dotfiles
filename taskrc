@@ -46,3 +46,4 @@ report.sdfsd.filter=+ACTIVE
 report.sdfsd.columns=description.count
 context.future=+future
 context.aug=+aug
+context=today
