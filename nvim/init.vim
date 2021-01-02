@@ -27,6 +27,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'vim-vdebug/vdebug'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 
 call plug#end()
 
