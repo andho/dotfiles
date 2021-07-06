@@ -68,7 +68,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fd vi-mode ssh-agent)
+plugins=(git docker fd vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -119,6 +119,7 @@ add-zsh-hook chpwd _save_location
 
 alias ls='ls --color=auto'
 alias vim='nvim'
+#alias elm-language-server='docker run --rm -it -v $(pwd)/app:/app -w /app --user 1000:1000 elm elm-language-server'
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
@@ -130,3 +131,19 @@ export TERMINAL=termite
 export PATH=$PATH:$HOME/.local/bin
 
 #source $HOME/dev/projects/own/quick-switch/quick-switch
+progl() {
+  export LD_LIBRARY_PATH="/home/$USER/.local/lib/amdgpu-pro-libgl:${LD_LIBRARY_PATH}"
+  export LIBGL_DRIVERS_PATH="/home/$USER/.local/lib/amdgpu-pro-libgl/dri"
+  export dri_driver="amdgpu"
+}
+
+passgen() {
+    local length=${1:-14}
+    < /dev/urandom tr -dc "A-Za-z0-9\-_:" | head -c${length}; echo
+}
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+# export FZF_DEFAULT_COMMAND="fd . $HOME"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_ALT_C_COMMAND="fd -t d . $HOME"
