@@ -331,7 +331,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Shift+Esc mode "$mode_system"
 
 #
 # Status Bar:
