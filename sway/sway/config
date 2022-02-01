@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-include $HOME/.config/sway/outputs
+include $HOME/.config/sway-outputs/outputs
 
 set $mod Mod4
 
@@ -20,7 +20,7 @@ set $right o
 
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-set $term $HOME/.i3/i3_shell.sh
+set $term $HOME/.local/bin/i3_shell.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
