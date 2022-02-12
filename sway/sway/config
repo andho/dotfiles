@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 include $HOME/.config/sway-outputs/outputs
+exec_always --no-startup-id kanshi
 
 set $mod Mod4
 
@@ -354,12 +355,9 @@ for_window [title="File Already Exist"] floating enable
 #for_window [app_id="firefox" title=""] floating enable
 for_window [app_id="firefox" title=".+[Ss]haring (Indicator|your screen)"] floating enable
 
-# Keyboard layout
-
-input type:keyboard {
-    xkb_layout us,mv
-    xkb_options grp:ctrls_toggle
-}
+# Inputs
+include $HOME/.config/sway/inputs/keyboards
+include $HOME/.config/sway/inputs/touchpads
 
 # for gaps
 

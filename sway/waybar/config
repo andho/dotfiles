@@ -9,11 +9,11 @@
     "modules-left": ["clock", "sway/mode", "sway/workspaces", "sway/window",],
     "modules-center": [],
     // "idle_inhibitor",
-    "modules-right": [ "idle_inhibitor", "pulseaudio","disk", "network", "memory", "cpu", "temperature", "custom/pacman", "tray",],
+    "modules-right": [ "idle_inhibitor", "pulseaudio","disk", "network", "battery", "memory", "cpu", "temperature", "custom/pacman", "tray",],
     // Modules configuration
      "sway/workspaces": {
          "disable-scroll": true,
-         "all-outputs": true,
+         "all-outputs": false,
          "format": "{name}",
          "persistent_workspaces": {
          	//"1": [],
