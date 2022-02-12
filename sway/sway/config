@@ -347,7 +347,7 @@ include /etc/sway/config.d/*
 #==============================================================
 
 for_window [title="^Android Emulator -"] floating enable
-for_window [class="gnome-calculator"] floating enable, move position 900 px 580 px, exec xdotool search --class Gnome-calculator getwindowpid -- windowsize %@ 250 195
+for_window [app_id="gnome-calculator"] floating enable, move position 900 px 580 px, exec xdotool search --class Gnome-calculator getwindowpid -- windowsize %@ 250 195
 for_window [title="Authentication"] floating enable
 for_window [title="Authorization is required"] floating enable
 for_window [title="Copying"] floating enable
