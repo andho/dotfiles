@@ -356,8 +356,7 @@ for_window [title="File Already Exist"] floating enable
 for_window [app_id="firefox" title=".+[Ss]haring (Indicator|your screen)"] floating enable
 
 # Inputs
-include $HOME/.config/sway/inputs/keyboards
-include $HOME/.config/sway/inputs/touchpads
+include $HOME/.config/sway/inputs/*
 
 # for gaps
 
