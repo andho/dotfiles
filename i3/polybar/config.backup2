@@ -1,0 +1,425 @@
+
+
+
+
+
+
+; #################### Bar launcher #########################
+
+[bar/launcher]
+width = 2%
+height = 24px
+offset-x = 3.0%
+offset-y = 7px
+radius = 12.3
+fixed-center = true
+
+padding-left = 2
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+;font-0 =  Fira Code Nerd Font:pixelsize=8.7:style=Bold;1
+font-0 = MaterialDesignIcons:pixelsize=12:style:Solid;3
+font-1 = BreezeSans:pixelsize=8:style=regular Condensed;1
+modules-left = 
+modules-center = launcher
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+bottom = false
+
+monitor = ${env:MONITOR:}
+
+; #################### Bar songs #########################
+
+[bar/songs]
+width = 18%
+height = 24px
+offset-x = 61.8% 
+offset-y = 7px
+radius = 0
+fixed-center = true
+background = #00000000
+foreground = #000000
+padding-left = 1
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+font-0 = BreezeSans:pixelsize=9:style=Medium Condensed;3.7
+font-1 = MaterialDesignIcons:pixelsize=14:style:Solid;5
+modules-left = 
+modules-center = song
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+bottom = false
+
+monitor = ${env:MONITOR:}
+
+; #################### Bar player #########################
+
+[bar/player]
+width = 5%
+height = 24px
+offset-x = 16.5% 
+offset-y = 7px
+radius = 10
+fixed-center = true
+background = #0e1619
+
+padding-left = 2
+padding-right = 2
+module-margin-left = 2
+module-margin-right = 0
+;font-0 =  Fira Code Nerd Font:pixelsize=8.7:style=Bold;1
+font-0 = MaterialDesignIcons:pixelsize=12:style:Solid;2.5
+modules-left = 
+modules-center = prev toggle next
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+bottom = false
+
+monitor = ${env:MONITOR:}
+
+
+; #################### Bar Left #########################
+
+[bar/left]
+width = 10%
+height = 24px
+offset-x = 5.5%
+offset-y = 7px
+radius = 10
+fixed-center = true
+background = #0e1619
+
+padding-left = 2
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+;font-0 =  Fira Code Nerd Font:pixelsize=8.7:style=Bold;1
+font-0 = "Material Icons:pixelsize=12:style:Solid;2"
+font-1 = BreezeSans:pixelsize=12:style=regular Condensed;1
+modules-left = 
+modules-center = date
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+
+monitor = ${env:MONITOR:}
+
+; ######################## Bar Center ########################
+
+[bar/center]
+width = 19%
+height = 24px
+offset-x = 40.2%
+offset-y = 7px
+radius = 10
+fixed-center = true
+background = #0e1619
+foreground = #ffd11a
+padding-left = 2
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+font-0 = FiraCode Nerd Font :pixelsize=12;1
+font-1 = MaterialDesignIcons:pixelsize=12:style:Solid;2
+modules-left =  
+modules-center = i3   
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+bottom = false
+
+monitor = ${env:MONITOR:}
+
+
+; ###################### Bar Right ########################
+
+[bar/right]
+width = 13%
+height = 24px
+offset-x = 22.3%
+offset-y = 7px
+radius = 10
+fixed-center = true
+background = #00000000
+foreground = #ffffff
+
+padding-left = 0
+padding-right = 6
+module-margin-left = 1
+module-margin-right = 0
+font-0 = System San Francisco:pixelsize=8.5:style=Regular;1
+font-1 = MaterialDesignIcons:pixelsize=12:style:Solid;2.6
+modules-right = cpu volume memory   
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+bottom = false
+
+monitor = ${env:MONITOR:}
+
+
+;tray-position = right
+;tray-detached = true
+;tray-maxsize =13
+;tray-transparent = false
+;tray-background = #1A2026
+;tray-scale = 0.98
+
+
+; ###################### Bar power ########################
+
+[bar/power]
+width = 8%
+height = 24px
+offset-x = 89.%
+offset-y = 7px
+radius = 10
+fixed-center = true
+background = #0e1619
+
+padding-left = 1
+padding-right = 4.4
+module-margin-left = 0
+module-margin-right = 0
+font-0 = System San Francisco:pixelsize=8.5:style=Regular;1
+font-1 = MaterialDesignIcons:pixelsize=12:style:Solid;2.6
+modules-right =  battery wlan power-menu 
+wm-restack = i3
+override-redirect = true
+cursor-click = pointer
+cursor-scroll = default
+bottom = false
+
+monitor = ${env:MONITOR:}
+
+
+;tray-position = right
+;tray-detached = true
+;tray-maxsize =13
+;tray-transparent = false
+;tray-background = #1A2026
+;tray-scale = 0.98
+
+
+
+
+
+
+;#################### Modules ####################
+
+[module/i3]
+
+type = internal/i3
+format = <label-state> <label-mode>
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #b3b3b3
+label-mode-background = #0e1619
+
+; focused = Active workspace on focused monitor
+; label-focused = ""
+label-focused = %index%
+label-focused-foreground = #ffffff
+label-focused-padding = 1
+label-focused-font = 3
+
+; unfocused = Inactive workspace on any monitor
+;label-unfocused = ""
+; label-unfocused = ""
+label-unfocused = %index%
+label-unfocused-padding = 1
+label-unfocused-font = 3
+
+; urgent = Workspace with urgency hint set
+; label-urgent = ""
+label-urgent = %index%
+label-urgent-foreground = #ffd11a
+label-urgent-font = 3
+label-urgent-padding = 1
+
+[module/date]
+
+type = custom/script
+
+exec =  /home/andho/.config/polybar/scripts/date.sh
+interval = 15
+tail = true
+; label-foreground = #b3b3b3
+label-foreground = #ffffff
+
+[module/power-menu]
+
+type = custom/script
+
+exec = echo " 󰤆"
+format-foreground =#ff3333
+click-left = /home/eloy/Downloads/sc/powermenu.sh &
+interval = 600
+
+
+[module/volume]
+
+type = internal/pulseaudio
+
+format = <label>
+
+label-volume = "󰎆 %{T2}%percentage%%%{T-}  "
+label-volume-foreground =#000000
+format-foreground = #000000
+
+label-muted = "󰎊  "
+label-muted-foreground = #607290
+
+
+[module/cpu]
+
+
+type = internal/cpu
+
+interval = 6
+format = <label>
+
+format-prefix = "󰍛 " 
+label = "%{T2}%percentage%%%{T2} "
+label-foreground =#000000
+format-foreground =#004d99
+
+
+[module/memory]
+
+type = internal/memory
+
+interval = 6
+format-prefix = "󰮯 "
+label = "%{T2}%percentage_used%%%{T-} " 
+label-foreground =#000000
+format-foreground =#b300b3
+
+
+[module/launcher]
+
+
+type = custom/text
+
+content = "%{T4} 󰊠 %{T-}"
+content-background = #FFFFFF
+content-foreground = #000000
+content-padding = 1
+content-font = 2
+click-left = rofi -show drun -eh 2 -bw 0 &
+interval = 600
+
+[module/battery]
+
+
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> %{T3}<label-charging>%{T-}
+
+format-discharging =<ramp-capacity> %{T3}<label-discharging>%{T-} 
+
+format-full = 󰂄%{T3}100%%{T-}
+format-full-foreground = #009933
+label-charging-foreground = #b3b3b3
+label-discharging-foreground = #b3b3b3
+
+animation-charging-0 = 󱊤
+animation-charging-1 = 󱊥
+animation-charging-2 = 󱊦
+animation-charging-foreground = #99ff99
+animation-charging-framerate = 900
+
+ramp-capacity-0 = %{F#FF004B}󰂃%{F-}
+ramp-capacity-1 = %{F#FF8000}󰁺%{F-}
+ramp-capacity-2 = %{F#FF8000}󰁻%{F-}
+ramp-capacity-3 = %{F#FF8000}󰁼%{F-}
+ramp-capacity-4 = 󰁽
+ramp-capacity-5 = 󰁾
+ramp-capacity-6 = 󰁿
+ramp-capacity-7 = 󰂀
+ramp-capacity-8 = 󰂁
+ramp-capacity-9 = 󰂂
+ramp-capacity-10 = 󰁹 
+ramp-capacity-foreground = #99ff99
+ramp-capacity-framerate = 750
+
+[module/wl]
+
+
+type = custom/script
+exec = echo "  󰤢 "
+format-foreground = #008060
+click-left = /home/eloy/Downloads/sc/network.sh &
+
+
+[module/prev]
+type = custom/script
+exec = echo "%{T5}󰒮 %{T-}" &
+format = "%{F#ffd11a}<label>%{F-}"
+interval = 600
+tail = true
+
+click-left = playerctl --player=spotify previous &
+
+
+[module/toggle]
+type = custom/script
+exec = [[ "$(playerctl -p spotify status 2>/dev/null)" == "Playing" ]] && echo "󰏦" || echo "󰐍"
+interval = 3
+format = "%{F#f2f2f2}<label>%{F-}"
+tail = true
+click-left = playerctl --player=spotify play-pause &
+
+
+[module/next]
+type = custom/script
+exec = echo "%{T5}󰒭 %{T-}" &
+format = "%{F#ffd11a}<label>%{F-}"
+interval = 600
+
+tail = true
+click-left = playerctl --player=spotify next &
+
+[module/song]
+type = custom/script
+exec = /home/eloy/Downloads/sc/song.sh 2>/dev/null || echo "No player found"
+format = "<label>  "
+format-prefix = "%{F#FFFFFF} 󰓇  %{F-}"
+format-background = #00000000 
+interval = 9
+format-foreground = #FFFFFF
+
+tail = true
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 12.0
+format-connected = <ramp-signal>
+label-connected = %essid%
+label-disconnected =  󰤭
+label-disconnected-foreground = #6c809e
+ramp-signal-0 = %{F#ff9999}󰤫%{F-}
+ramp-signal-1 = %{F#ff9999}󰤟%{F-}
+ramp-signal-2 =  󰤢
+ramp-signal-3 =  󰤥
+ramp-signal-4 =  󰤨
+ramp-signal-foreground = #ffb399
