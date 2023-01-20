@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-include $HOME/.config/sway-outputs/outputs
+include $HOME/.config/sway/outputs
 exec_always --no-startup-id kanshi
 
 set $mod Mod4
@@ -53,6 +53,9 @@ bindsym $mod+f11 fullscreen
 bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+Ctrl+Shift+s exec grim - | swappy -f -
 bindsym $mod+p exec --no-startup-id passmenu
+
+# Color picker
+bindsym $mod+c exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | wl-copy
 
 # dismiss mako notifications
 bindsym Shift+space exec makoctl dismiss --all
@@ -186,6 +189,10 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $wsBrowser "browser"
+set $wsNotes "notes"
+set $wsSocials "socials"
+set $wsAndroid "androids"
 
 ## original workspace settings start
 ############################################################
@@ -237,27 +244,35 @@ bindsym $mod+Shift+g exec --no-startup-id i3-assign-workspace-to-group
 # Rename/renumber workspace. Uses Super+Alt+n
 bindsym Mod1+Mod4+n exec --no-startup-id i3-rename-workspace
 
-bindsym $mod+1 $exec_i3_groups workspace-number 1
-bindsym $mod+2 $exec_i3_groups workspace-number 2
-bindsym $mod+3 $exec_i3_groups workspace-number 3
-bindsym $mod+4 $exec_i3_groups workspace-number 4
-bindsym $mod+5 $exec_i3_groups workspace-number 5
-bindsym $mod+6 $exec_i3_groups workspace-number 6
-bindsym $mod+7 $exec_i3_groups workspace-number 7
-bindsym $mod+8 $exec_i3_groups workspace-number 8
-bindsym $mod+9 $exec_i3_groups workspace-number 9
-bindsym $mod+0 $exec_i3_groups workspace-number 10
+bindsym $mod+1 $exec_i3_groups workspace-number $ws1
+bindsym $mod+2 $exec_i3_groups workspace-number $ws2
+bindsym $mod+3 $exec_i3_groups workspace-number $ws3
+bindsym $mod+4 $exec_i3_groups workspace-number $ws4
+bindsym $mod+5 $exec_i3_groups workspace-number $ws5
+bindsym $mod+6 $exec_i3_groups workspace-number $ws6
+bindsym $mod+7 $exec_i3_groups workspace-number $ws7
+bindsym $mod+8 $exec_i3_groups workspace-number $ws8
+bindsym $mod+9 $exec_i3_groups workspace-number $ws9
+bindsym $mod+0 $exec_i3_groups workspace-number $ws10
+bindsym $mod+Ctrl+n workspace $wsNotes
+bindsym $mod+Ctrl+f workspace $wsBrowser
+bindsym $mod+Ctrl+w workspace $wsSocials
+bindsym $mod+Ctrl+a workspace $wsAndroid
 
-bindsym $mod+Shift+1 $exec_i3_groups move-to-number 1
-bindsym $mod+Shift+2 $exec_i3_groups move-to-number 2
-bindsym $mod+Shift+3 $exec_i3_groups move-to-number 3
-bindsym $mod+Shift+4 $exec_i3_groups move-to-number 4
-bindsym $mod+Shift+5 $exec_i3_groups move-to-number 5
-bindsym $mod+Shift+6 $exec_i3_groups move-to-number 6
-bindsym $mod+Shift+7 $exec_i3_groups move-to-number 7
-bindsym $mod+Shift+8 $exec_i3_groups move-to-number 8
-bindsym $mod+Shift+9 $exec_i3_groups move-to-number 9
-bindsym $mod+Shift+0 $exec_i3_groups move-to-number 10
+bindsym $mod+Shift+1 $exec_i3_groups move-to-number $ws1
+bindsym $mod+Shift+2 $exec_i3_groups move-to-number $ws2
+bindsym $mod+Shift+3 $exec_i3_groups move-to-number $ws3
+bindsym $mod+Shift+4 $exec_i3_groups move-to-number $ws4
+bindsym $mod+Shift+5 $exec_i3_groups move-to-number $ws5
+bindsym $mod+Shift+6 $exec_i3_groups move-to-number $ws6
+bindsym $mod+Shift+7 $exec_i3_groups move-to-number $ws7
+bindsym $mod+Shift+8 $exec_i3_groups move-to-number $ws8
+bindsym $mod+Shift+9 $exec_i3_groups move-to-number $ws9
+bindsym $mod+Shift+0 $exec_i3_groups move-to-number $ws10
+bindsym $mod+Shift+Ctrl+n move container to workspace $wsNotes
+bindsym $mod+Shift+Ctrl+f move container to workspace $wsBrowser
+bindsym $mod+Shift+Ctrl+w move container to workspace $wsSocials
+bindsym $mod+Shift+Ctrl+a move container to workspace $wsAndroid
 
 # Switch to previous/next workspace (in all groups).
 bindsym $mod+comma workspace prev
@@ -268,6 +283,7 @@ bindsym $mod+period workspace next
 
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+m move workspace to output left
+bindsym $mod+Shift+m focus output left
 
 
 # resize window (you can also use the mouse for that)
@@ -347,13 +363,16 @@ include /etc/sway/config.d/*
 #==============================================================
 
 for_window [title="^Android Emulator -"] floating enable
-for_window [app_id="gnome-calculator"] floating enable, move position 900 px 580 px, exec xdotool search --class Gnome-calculator getwindowpid -- windowsize %@ 250 195
+for_window [app_id="org.gnome.Calculator"] floating enable, move position 900 px 580 px, exec xdotool search --class Gnome-calculator getwindowpid -- windowsize %@ 250 195
 for_window [title="Authentication"] floating enable
 for_window [title="Authorization is required"] floating enable
 for_window [title="Copying"] floating enable
 for_window [title="File Already Exist"] floating enable
 #for_window [app_id="firefox" title=""] floating enable
 for_window [app_id="firefox" title=".+[Ss]haring (Indicator|your screen)"] floating enable
+
+#for_window [app_id="firefox" title=".*Notion — Mozilla Firefox$"] floating enable, move scratchpad, scratchpad show
+#bindsym $mod+l [app_id="firefox" title=".*Notion — Mozilla Firefox$"] scratchpad show
 
 # Inputs
 include $HOME/.config/sway/inputs/*
