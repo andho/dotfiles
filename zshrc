@@ -4,6 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+AGNOSTER_PROMPT_SEGMENTS=("prompt_git")
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -68,7 +69,8 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fd vi-mode)
+#plugins=(git docker fd vi-mode)
+plugins=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,6 +118,7 @@ _save_location() {
 
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 add-zsh-hook chpwd _save_location
+add-zsh-hook precmd _save_location
 
 alias ls='ls --color=auto'
 alias vim='nvim'
@@ -127,8 +130,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 # export ANDROID_SDK_ROOT=$ANDROID_HOME
 # export ANDROID_AVD_HOME=~/.android/avd
-export TERMINAL=termite
+export TERMINAL=alacrity
+export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin
+export PIPENV_VENV_IN_PROJECT=1
+#export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
+
+# bevy
+export AMD_VULKAN_ICD=RADV
+export WINIT_UNIX_BACKEND=wayland
 
 #source $HOME/dev/projects/own/quick-switch/quick-switch
 progl() {
@@ -142,8 +152,16 @@ passgen() {
     < /dev/urandom tr -dc "A-Za-z0-9\-_:" | head -c${length}; echo
 }
 
+alias urlencode="python -c \"import urllib.parse;print (urllib.parse.quote(input()))\""
+
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-# export FZF_DEFAULT_COMMAND="fd . $HOME"
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin
+
+export SSH_CA_FILES=$HOME/dev/infra/allied/ssh-ca
+export SSL_FILES=$HOME/dev/infra/allied/ssl
+
+export PATH=$PATH:$HOME/.maestro/bin
