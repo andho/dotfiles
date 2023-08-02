@@ -7,12 +7,15 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'ctrlpvim/ctrlp.vim'
+" Fuzzy finder
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.1'}
+Plug 'nvim-telescope/telescope-symbols.nvim'
+Plug 'olacin/telescope-cc.nvim'
 
 " shortcuts and snippets
 "Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
-Plug 'hrsh7th/vim-vsnip'
 
 " Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
@@ -40,22 +43,36 @@ Plug 'Kachyz/vim-gitmoji'
 Plug 'ObserverOfTime/coloresque.vim'
 Plug 'vifm/vifm.vim'
 
+" git stuff
+Plug 'tpope/vim-fugitive'
+Plug 'junkblocker/patchreview-vim'
+
+" Code formatting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Refactoring
+Plug 'napmn/react-extract.nvim'
+
 " rust
 Plug 'rust-lang/rust.vim'
 Plug 'simrat39/rust-tools.nvim'
+Plug 'DingDean/wgsl.vim'
 
 " language server
 Plug 'neovim/nvim-lspconfig'
 Plug 'lspcontainers/lspcontainers.nvim'
 
 " completion framework
+Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 
-" required for typescript lsp
+" Plug 'rafamadriz/friendly-snippets'
+
+" required for typescript lsp and telescope
 Plug 'nvim-lua/plenary.nvim'
 
 " for typescript lsp setup
@@ -134,12 +151,12 @@ set shortmess+=c
 " Configure LSP through rust-tools.nvim plugin
 lua <<EOF
 local nvim_lsp = require'lspconfig'
+local rt = require("rust-tools")
 
 local opts = {
     tools = { -- rust-tools options
-        autoSetHints = true,
-        hover_with_actions = true,
         inlay_hints = {
+            auto = true,
             show_parameter_hints = false,
             parameter_hints_prefix = "",
             other_hints_prefix = "",
@@ -151,7 +168,12 @@ local opts = {
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
     server = {
         -- on_attach is a callback called when the language server attaches to the buffer
-        -- on_attach = on_attach,
+        on_attach = function(_, bufnr)
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code actions groups
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end,
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -161,11 +183,11 @@ local opts = {
                     command = "clippy"
                 },
             }
-        }
+        },
     },
 }
 
-require('rust-tools').setup(opts)
+rt.setup(opts)
 EOF
 
 " enabling lsp for typescript and python
@@ -273,6 +295,20 @@ EOF
 
 " end run lsp config
 
+lua <<EOF
+require("react-extract").setup()
+vim.keymap.set({ "v" }, "<Leader>re", require("react-extract").extract_to_new_file)
+vim.keymap.set({ "v" }, "<Leader>rc", require("react-extract").extract_to_current_file)
+EOF
+
+" telescope Setup
+
+lua <<EOF
+local telescope = require('telescope')
+telescope.setup()
+telescope.load_extension("conventional_commits")
+EOF
+
 " let g:pymode_python = 'python'
 let g:pymode_lint_config = '$HOME/pylint.rc'
 
@@ -312,6 +348,9 @@ let g:db_ui_table_helpers = {
 " let g:multi_cursor_prev_key = '<C-k>'
 " let g:multi_cursor_skip_key = '<C-x>'
 " let g:multi_cursor_quit_key = '<Esc>'
+
+" overriding ctrlp for fzf
+nmap <C-p> :FZF<CR>
 
 set showcmd
 " Move to next buffer
@@ -418,4 +457,4 @@ autocmd FileType yaml setlocal sw=2 ts=2 expandtab
 " lsp stuff
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 " auto format
-autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200);
+" autocmd BufWritePre *.rs lua vim.lsp.buf.format(nil, 200);
